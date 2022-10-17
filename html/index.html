@@ -956,10 +956,19 @@
                   class="block border-2 border-solid border-slate-200 w-full max-w-xs rounded" type="text" name="LastName"
                   id="LastName" v-model="base_data.customer.LastName">
               </div>
-              <div class="my-4 flex flex-row-reverse justify-end" v-for="preference in base_data.preferences">
+                
+              <div v-for="category in base_data.ordered_categories">
+                <h2 class="font-bold font-serif mt-6 mb-3 text-lg text-indigo-900">{{ category.Category_Label }}</h2>
+                <div v-for="preference in base_data.preferences">
+              <!-- preference row -->
+              <div class="my-4 flex flex-row-reverse justify-end" v-if="preference.category===category.Category_ID">
                 <label class="inline-block text-slate-600 text-base" v-bind:for="preference.Preference_ID">{{preference.label}}</label>
                 <input class="appearance-none inline-block border-2 border-solid border-slate-200 mr-2 px-2 rounded w-5 h-5 checked:bg-indigo-600 focus:ring-0 focus:outline-2 focus:outline-indigo-300" type="checkbox" v-bind:name="preference.Preference_ID" v-bind:id="preference.Preference_ID" v-bind:value="preference.Value" v-model="preference.Value">
               </div>
+              <!--.preference row-->
+              </div>
+              </div>
+
             </div>
             <div class="text-center">
               <button @click="savePreferences" class="rounded-full bg-indigo-600 hover:bg-indigo-800 px-6 py-3 text-white" type="submit">Save my
@@ -975,12 +984,11 @@
           </div>
         </div>
       </div>
-      
-      
+       
     </div>
   </main>
   <footer class="bg-indigo-800 px-5">
-    <div class="flex justify-between mx-auto my-5 px-0 py-3 w-full md:w-5/6 max-w-screen-md text-white text-sm">
+    <div class="flex justify-between mx-auto my-0 px-0 py-3 w-full md:w-5/6 max-w-screen-md text-white text-sm">
       © Copyright 2022
       <div>
         <ul class="list-none">
@@ -1100,8 +1108,8 @@
                 buId: this.base_config.subscriber_BU,
                 master_customer_de : this.base_config.master_customer_de,
                 preferences_values_de : this.base_config.preferences_values_de,
-                preferences_labels_de : this.base_config.preferences_labels_de
-                
+                preferences_labels_de : this.base_config.preferences_labels_de,
+                categories_de : this.base_config.categories_de
               }
                 fetch(this.base_config.pref_retrievalURL, {
                   method: 'POST', // or 'PUT'
@@ -1109,14 +1117,18 @@
                   body: JSON.stringify(body),
                 }).then((response) => response.json()).then(
                     (data) => {
+                      //console.log(data);
                       this.base_data = {};
                       this.base_data.customer = data.customer[0];
                       this.base_data.preferences = [];
+                      this.base_data.ordered_categories = [];
+
                       data.preferences.forEach(pref=>{
                           var each_pref = {...pref};
                           each_pref.Value = each_pref.Value === 'True';
                           each_pref.label = data.pref_labels.filter(item=>item.Preference_ID===pref.Preference_ID)[0].Label_Values
                           each_pref.type = data.bu_preferences.filter(item=>item.Preference_ID===pref.Preference_ID)[0].Preference_Type;
+                          each_pref.category = data.bu_preferences.filter(item=>item.Preference_ID===pref.Preference_ID)[0].Category_ID;
                           if(each_pref.type != 'Boolean'){
                               each_pref.translated_value = data.pref_values.filter(item=>item.Preference_ID===pref.Preference_ID)[0]?.Option_Value;
                           }else{
@@ -1124,6 +1136,10 @@
                           }
                           this.base_data.preferences.push(each_pref);
                       });
+
+                      //sort categories into order
+                      this.base_data.ordered_categories = data.category_labels.sort((a,b) => a.Category_Index - b.Category_Index);
+                      
                   })
                   .catch((error) => {
                     console.log('Error:', error);
@@ -1131,6 +1147,7 @@
                     this.showPage = true;
                     this.showSpinner = false;
                     this.jsonStr = JSON.stringify(this.base_data, null, 2);
+                    //console.log(this.base_data);
                   });
                 
             },
@@ -1151,13 +1168,17 @@
                       "customer_id" : urlParams.get('customer_id'),
                       "customer_locale" : urlParams.get('customer_locale')?urlParams.get('customer_locale'):'en_AU',
                       "subscriber_BU" : urlParams.get('customer_buId'),
-                      "pref_retrievalURL":"https://mcpdwdml-zryw5dczwlf-f-f9kcm.pub.sfmc-content.com/sxvpd3duwja",
+                      //"pref_retrievalURL":"https://mcpdwdml-zryw5dczwlf-f-f9kcm.pub.sfmc-content.com/sxvpd3duwja",
+                      "pref_retrievalURL" : "https://mcpdwdml-zryw5dczwlf-f-f9kcm.pub.sfmc-content.com/q32m5kna4qx",
                       "pref_processing_URL":"https://mcpdwdml-zryw5dczwlf-f-f9kcm.pub.sfmc-content.com/nk4ctlggevc",
                       "captcha" : {
                         "key": "google_site_key"
                       },
                       "preferences_target_de" : {
                         "key":"BU_Preferences"
+                      },
+                      "categories_de" : {
+                        "key":"BU_Preference_Categories"
                       },
                       "master_preferences_de": {
                         "key":"Master_Preferences"
