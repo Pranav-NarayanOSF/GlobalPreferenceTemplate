@@ -1014,7 +1014,6 @@
             doLogin : function(event){
               this.showSpinner = true;
               event.preventDefault();
-              console.log('user',this.user);
               var payload = {
                 "admin_de" : {
                     "key" : this.adminKey
@@ -1038,7 +1037,6 @@
                 headers : this.headers,
                 body : JSON.stringify(payload)
               }).then((response)=>response.json()).then((data)=>{
-                console.log('data',data); 
                 if(data.statusCode === 200){
                   this.showSpinner = false;
                   this.loginCompleted = true;
