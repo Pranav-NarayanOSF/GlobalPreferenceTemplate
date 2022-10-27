@@ -1065,20 +1065,17 @@
                   this.showSpinner = false;
                   this.loginCompleted = true;
                   this.showSuccessMessage = true;
-                  setTimeout(()=>{
-                    console.log('asd')
-                    this.showSuccessMessage = false;
-                    const anchorTags = document.querySelectorAll('a');
-                    anchorTags.forEach(function (a) {
-                        a.addEventListener('click', function (ev) {
-                            ev.preventDefault();
-                        })
-                    });
-                    const dropdownEl = document.querySelector('[data-dropdown-toggle]');
-                    if (dropdownEl) {
-                        dropdownEl.click();
-                    }
-                  },2000)
+                  this.showSuccessMessage = false;
+                  const anchorTags = document.querySelectorAll('a');
+                  anchorTags.forEach(function (a) {
+                      a.addEventListener('click', function (ev) {
+                          ev.preventDefault();
+                      })
+                  });
+                  const dropdownEl = document.querySelector('[data-dropdown-toggle]');
+                  if (dropdownEl) {
+                      dropdownEl.click();
+                  }
                 }else if(data.statusCode === 401){
                   this.showSpinner = false;
                   this.showError = true;
