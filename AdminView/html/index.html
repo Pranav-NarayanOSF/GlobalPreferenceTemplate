@@ -968,6 +968,7 @@
               loginCompleted : false,
               type:"text",
               showSpinner : false,
+              url : "https://mcpdwdml-zryw5dczwlf-f-f9kcm.pub.sfmc-content.com/a32jwmqkvaa",
               adminKey : 'F3D7F9DA-6E42-4880-B7E6-1DFAF6C4C07A',
               user:{
                 user_name : '',
@@ -984,6 +985,33 @@
             doLogin : function(event){
               event.preventDefault();
               console.log('user',this.user);
+              var payload = {
+                "admin_de" : {
+                    "key" : this.adminKey
+                },
+                "filter" : {
+                    "LeftOperand" : {
+                        "Property" : "UserName",
+                        "SimpleOperator" : "equals",
+                        "Value" : this.user.user_name
+                    },
+                    "LogicalOperator" : "AND",
+                    "RightOperand" : {
+                        "Property" : "Password",
+                        "SimpleOperator":"equals",
+                        "Value": this.user.password
+                    }
+                }
+              }
+              fetch(this.url,{
+                method : 'POST',
+                headers : headers,
+                body : JSON.stringify(payload)
+              }).then((response)=>{response.json()}).then((data)=>{
+                console.log('data',data);
+              }).catch((err)=>{
+                console.log('err',err)
+              })
             }
           },
         
