@@ -967,6 +967,7 @@
             return {
               loginCompleted : false,
               type:"text",
+              headers : { "Content-Type": "application/json" },
               showSpinner : false,
               url : "https://mcpdwdml-zryw5dczwlf-f-f9kcm.pub.sfmc-content.com/a32jwmqkvaa",
               adminKey : 'F3D7F9DA-6E42-4880-B7E6-1DFAF6C4C07A',
@@ -983,6 +984,7 @@
           },  
           methods: {
             doLogin : function(event){
+               
               event.preventDefault();
               console.log('user',this.user);
               var payload = {
@@ -1005,10 +1007,10 @@
               }
               fetch(this.url,{
                 method : 'POST',
-                headers : headers,
+                headers : this.headers,
                 body : JSON.stringify(payload)
               }).then((response)=>{response.json()}).then((data)=>{
-                console.log('data',data);
+                console.log('data',data); 
               }).catch((err)=>{
                 console.log('err',err)
               })
