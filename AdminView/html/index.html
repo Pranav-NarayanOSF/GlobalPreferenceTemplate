@@ -1045,6 +1045,7 @@
                   this.loginCompleted = true;
                   this.showSuccessMessage = true;
                   setTimeout(()=>{
+                    console.log('asd')
                     this.showSuccessMessage = false;
                   },2000)
                 }else if(data.statusCode === 401){
