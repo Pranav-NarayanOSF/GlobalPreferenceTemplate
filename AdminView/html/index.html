@@ -1110,18 +1110,16 @@
             change_in_action: function(event){
               if(event.target.value === ''){
                 this.show_de_picklist = false;
-              }else{
-                if(event.target.value === 'ADD'){
+              }else if(event.target.value === 'ADD'){
                   this.label_name = 'record/s to the data extension';
-                }else if(event.target.value === 'UPDATE' ){
-                  this.label_name = 'record/s in the data extension';
-                }else{
-                  this.label_name = 'record/s from the data extension';
-                }
+                  this.show_de_picklist = true;
+              }else if(event.target.value === 'UPDATE' ){
+                this.label_name = 'record/s in the data extension';
+                this.show_de_picklist = true;
+              }else{
+                this.label_name = 'record/s from the data extension';
                 this.show_de_picklist = true;
               }
-              
-
             },
             doLogin : function(event){
               this.showSpinner = true;
