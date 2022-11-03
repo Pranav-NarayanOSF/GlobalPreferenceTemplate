@@ -938,17 +938,18 @@
             </div>
           </div>
           <label for="action" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">I want to </label>
-          <select id="action" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <select v-model="selectedAction" id="action" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <option v-for="action in actions" v-bind:value="action">{{action}}</option>
           </select>
           <br/>
           
           
-          <select id="de" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <select v-model="selectedDE" id="de" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <option v-for="[key, value] in obj_config" v-bind:value="key">{{key}}</option>
           </select>
           <label for="de" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">record/s from/to the Data Extension</label>
         </div>
+        {{selectedAction}} {{selectedDE}}
       </div>
       <div v-else>
         <div v-if="showSpinner" class="flex justify-center items-center space-x-2">
@@ -1050,6 +1051,8 @@
               headers : { "Content-Type": "application/json" },
               showSpinner : false,
               showError : false,
+              selectedAction : '',
+              selectedDE : '',
               actions : ['Add','Update','Delete'],
               obj_config : new Map(),
               url : "https://mcpdwdml-zryw5dczwlf-f-f9kcm.pub.sfmc-content.com/a32jwmqkvaa",
