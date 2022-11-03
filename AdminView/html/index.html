@@ -1122,7 +1122,7 @@
                 var record = {};
                 this.selected_config_obj.fields.forEach(field=>{
                   
-                  record = {...record,[field]:""};
+                  record[field] = '';
                 });
                 console.log('record',record);
                 this.records.push(record);
