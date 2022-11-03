@@ -1125,11 +1125,13 @@
           methods: {
             addRows : function(event){
               console.log('asdf');
+              this.showrecordstable = false;
               var record = {};
               this.selected_config_obj.fields.forEach(field=>{
                 record = {...record,[field.name]:""};
               });
               this.records.push(record);
+              this.showrecordstable = true;
             },
             removeRows : function(index){
               this.rows.splice(index,1);
@@ -1143,16 +1145,13 @@
                 this.showError = false;
                 this.records = [];
                 this.selected_config_obj = this.obj_config.get(this.selectedDE);
-                console.log('****',this.obj_config.get(this.selectedDE));
                 var record = {};
                 this.selected_config_obj.fields.forEach(field=>{
                   record = {...record,[field.name]:""};
                 });
-                console.log('record',record);
                 this.records.push(record);
                 this.showrecordstable = true;
               }
-              
             },
             change_in_action: function(event){
               if(event.target.value === ''){
