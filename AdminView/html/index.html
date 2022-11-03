@@ -1135,16 +1135,102 @@
           },
           created(){
             this.obj_config.set('Preferences',{
-              fields : [],
-              key : ""
+              fields : [{
+                "name":"Preference_Type",
+                "type":"text",
+                "tooltip":""
+              },
+              {
+                "name":"Default_Values",
+                "type":"text",
+                "tooltip":""
+              },
+              {
+                "name":"BU_ID",
+                "type":"text",
+                "tooltip":""
+              },
+              {
+                "name":"Preference_ID",
+                "type":"text",
+                "tooltip":""
+              },
+              {
+                "name":"Category_ID",
+                "type":"text",
+                "tooltip":""
+              }
+              ],
+              key : "BU_Preferences"
             });
             this.obj_config.set('Labels',{
-              fields : [],
-              key : ""
+              fields : [{
+                "name":"BU_ID",
+                "type":"text",
+                "tooltip":""
+              },
+              {
+                "name":"Preference_ID",
+                "type":"text",
+                "tooltip":""
+              },
+              {
+                "name":"Language_Code",
+                "type":"text",
+                "tooltip":""
+              },
+              {
+                "name":"Label_Values",
+                "type":"text",
+                "tooltip":""
+              }],
+              key : "Preference_Labels"
             });
-            this.obj_config.set('Translations',{
-              fields : [],
-              key : ""
+            this.obj_config.set('Values',{
+              fields : [{
+                "name":"BU_ID",
+                "type":"text",
+                "tooltip":""
+              },
+              {
+                "name":"Preference_ID",
+                "type":"text",
+                "tooltip":""
+              },
+              {
+                "name":"Language_Code",
+                "type":"text",
+                "tooltip":""
+              },
+              {
+                "name":"Option_Value",
+                "type":"text",
+                "tooltip":""
+              }],
+              key : "Preference_Values"
+            });
+            this.obj_config.set('Categories',{
+              fields : [{
+                "name":"BU_ID",
+                "type":"text",
+                "tooltip":""
+              },
+              {
+                "name":"Category_ID",
+                "type":"text",
+                "tooltip":""
+              },
+              {
+                "name":"Category_Label",
+                "type":"text",
+                "tooltip":""
+              },
+              {
+                "name":"Category_Index",
+                "type":"text",
+                "tooltip":""
+              }],
+              key : "BU_Preference_Categories"
             });
 
           },
