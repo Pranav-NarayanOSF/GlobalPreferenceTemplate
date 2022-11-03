@@ -1208,7 +1208,7 @@
                 fetch(source === 'SEARCH' ? this.api_url+'?'+queryParams : this.api_url , {
                   method: method,
                   headers: headers,
-                  body : JSON.stringify(payload)
+                  body : method==='GET'?null:JSON.stringify(payload)
                 }).then((response)=>response.json()).then((data)=>{
                   console.log('d',data);
                   if(source === 'SEARCH'){
