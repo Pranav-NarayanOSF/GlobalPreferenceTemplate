@@ -937,31 +937,10 @@
               </div>
             </div>
           </div>
-          <t-dropdown text="Menu">
-            <div class="py-1 rounded-md shadow-xs">
-              <a
-                href="#"
-                class="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-                role="menuitem"
-              >
-                Your Profile
-              </a>
-              <a
-                href="#"
-                class="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-                role="menuitem"
-              >
-                Settings
-              </a>
-              <a
-                href="#"
-                class="block px-4 py-2 text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-                role="menuitem"
-              >
-                Sign out
-              </a>
-            </div>
-          </t-dropdown>
+          <label for="action" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Select an option</label>
+          <select id="action" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              <option v-for="action in actions" selected v-bind:value="action">{{action}}</option>
+          </select>
         </div>
       </div>
       <div v-else>
@@ -1064,6 +1043,23 @@
               headers : { "Content-Type": "application/json" },
               showSpinner : false,
               showError : false,
+              actions : ['ADD','UPDATE','DELETE'],
+              config : {
+                objects : {
+                  'Preferences':{
+                    fields : [],
+                    key : ""
+                  },
+                  'Labels' : {
+                    fields : [],
+                    key : ""
+                  },
+                  'Translations':{
+                    fields : [],
+                    key : ""
+                  }
+                }
+              },
               url : "https://mcpdwdml-zryw5dczwlf-f-f9kcm.pub.sfmc-content.com/a32jwmqkvaa",
               adminKey : 'F3D7F9DA-6E42-4880-B7E6-1DFAF6C4C07A',
               user:{
