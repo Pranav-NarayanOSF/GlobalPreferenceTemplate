@@ -1112,7 +1112,7 @@
           methods: {
             doshowRecordtable : function(event){
               if(this.selectedDE == ''){
-
+                this.showError = true;
               }else{
                 this.confirmButtonDisable = false;
                 this.records = [];
