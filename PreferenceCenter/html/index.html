@@ -1118,6 +1118,7 @@
                 }).then((response) => response.json()).then(
                     (data) => {
                       //console.log(data);
+                      const preferencesPresent = [];
                       this.base_data = {};
                       this.base_data.customer = data.customer[0];
                       this.base_data.preferences = [];
@@ -1125,6 +1126,7 @@
 
                       data.preferences.forEach(pref=>{
                           var each_pref = {...pref};
+                          preferencesPresent.push(each_pref.Preference_ID);
                           each_pref.Value = each_pref.Value === 'True';
                           each_pref.label = data.pref_labels.filter(item=>item.Preference_ID===pref.Preference_ID)[0].Label_Values
                           each_pref.type = data.bu_preferences.filter(item=>item.Preference_ID===pref.Preference_ID)[0].Preference_Type;
@@ -1136,7 +1138,23 @@
                           }
                           this.base_data.preferences.push(each_pref);
                       });
-
+                      var notPresent = data.bu_preferences.filter(function(el){
+                        return !preferencesPresent.includes(el.Preference_ID);
+                      })
+                      notPresent.forEach(pref=>{
+                          var each_pref = {...pref};
+                          preferencesPresent.push(each_pref.Preference_ID);
+                          each_pref.Value = each_pref.Value === 'True';
+                          each_pref.label = data.pref_labels.filter(item=>item.Preference_ID===pref.Preference_ID)[0].Label_Values
+                          each_pref.type = data.bu_preferences.filter(item=>item.Preference_ID===pref.Preference_ID)[0].Preference_Type;
+                          each_pref.category = data.bu_preferences.filter(item=>item.Preference_ID===pref.Preference_ID)[0].Category_ID;
+                          if(each_pref.type != 'Boolean'){
+                              each_pref.translated_value = data.pref_values.filter(item=>item.Preference_ID===pref.Preference_ID)[0]?.Option_Value;
+                          }else{
+                            each_pref.translated_value = 'True/False';
+                          }
+                          this.base_data.preferences.push(each_pref);
+                      });
                       //sort categories into order
                       this.base_data.ordered_categories = data.category_labels.sort((a,b) => a.Category_Index - b.Category_Index);
                       
