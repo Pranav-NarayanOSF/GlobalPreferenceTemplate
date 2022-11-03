@@ -1167,7 +1167,8 @@
             }
           },  
           methods: {
-            doAction(){
+            doAction(event){
+              console.log(event.target.name);
               if(this.selectedAction == 'Add'){
                 var payload = {
                   target : this.selected_config_obj.key,
