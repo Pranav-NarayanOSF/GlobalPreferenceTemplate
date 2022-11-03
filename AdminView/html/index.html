@@ -1184,7 +1184,7 @@
               }
               //do api call
               console.log('payload',payload);
-              this.doCallOut('POST',payload,'UPSERT');
+              this.doCallOut('POST',payload,'UPSERT',null);
             },
             doAction(event){
               console.log(event.target.name);
@@ -1192,7 +1192,7 @@
                 this.searchObj.target = this.selected_config_obj.key;
                 const queryParams = new URLSearchParams(this.searchObj).toString();
                 console.log('queryParams',queryParams);
-                this.doCallOut('GET',null,'SEARCH')
+                this.doCallOut('GET',null,'SEARCH',queryParams)
 
               }else if(this.selectedAction == 'Delete'){
                 var payload = {
@@ -1202,10 +1202,11 @@
 
               }
             },
-            doCallOut : function(method,payload,source){
+            doCallOut : function(method,payload,source,queryParams){
               const headers = { "Content-Type": "application/json" };
-                fetch(this.api_url+'?'+queryParams, {
-                  method: 'GET',
+              
+                fetch(source === 'SEARCH' ? this.api_url+'?'+queryParams : this.api_url , {
+                  method: method,
                   headers: headers,
                   body : payload
                 }).then((response)=>response.json()).then((data)=>{
