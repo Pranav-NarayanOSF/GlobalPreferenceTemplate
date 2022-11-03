@@ -1000,7 +1000,7 @@
                   type="submit">{{buttonName}}</button>
               </div>
             </div>
-            <div v-else style="margin-top:2%;">
+            <div v-if="showFieldsSection" style="margin-top:2%;">
               <div v-if="showError">
                 <div class="flex p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
                   role="alert">
@@ -1145,6 +1145,7 @@
               selectedDE : '',
               selected_config_obj:{},
               showrecordstable : false,
+              showFieldsSection : false,
               confirmButtonDisable : false,
               show_de_picklist:false,
               label_name : '',
@@ -1205,11 +1206,13 @@
                 this.label_name = 'record/s in the data extension';
                 this.show_de_picklist = true;
                 this.showrecordstable = false;
+                this.showFieldsSection = true;
               }else{
                 this.label_name = 'record/s from the data extension';
                 this.show_de_picklist = true;
                 this.buttonName = 'Submit';
                 this.showrecordstable = false;
+                this.showFieldsSection = true;
               }
             },
             doLogin : function(event){
