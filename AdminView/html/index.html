@@ -11,7 +11,8 @@
   <script type="importmap">
     { "imports": {
       "vue":        "https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.41/vue.esm-browser.prod.js",
-      "vue-router": "https://cdnjs.cloudflare.com/ajax/libs/vue-router/4.1.5/vue-router.esm-browser.min.js"
+      "vue-router": "https://cdnjs.cloudflare.com/ajax/libs/vue-router/4.1.5/vue-router.esm-browser.min.js",
+      "vue-tailwind" : "https://cdn.jsdelivr.net/npm/vue-tailwind@2.5.1/dist/vue-tailwind.min.js"
     } }
   </script>
   <script>
@@ -1055,7 +1056,7 @@
   </script>
   <script type="module">
     import { createApp } from 'vue'
-    import VueTailwind from './vue-tailwind/dist/full'
+    import VueTailwind from 'vue-tailwind'
     const settings = {
       't-dropdown': {
         component: TDropdown,
