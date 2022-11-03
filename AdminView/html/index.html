@@ -1077,6 +1077,7 @@
               selectedDE : '',
               selected_config_obj:{},
               showrecordstable : false,
+              confirmButtonDisable : false,
               show_de_picklist:false,
               label_name : '',
               actions : ['Add','Update','Delete'],
@@ -1096,7 +1097,8 @@
           },  
           methods: {
             doshowRecordtable : function(event){
-              this.showrecordstable = true;
+              
+              this.confirmButtonDisable = false;
               this.records = [];
               this.selected_config_obj = this.obj_config.get(this.selectedDE);
               var record = {};
@@ -1105,7 +1107,7 @@
                 record = {...record,[a]:""};
               })
               this.records.push(record);
-
+              this.showrecordstable = true;
             },
             change_in_action: function(event){
               if(event.target.value === ''){
