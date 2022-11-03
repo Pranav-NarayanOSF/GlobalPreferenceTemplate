@@ -996,7 +996,7 @@
                 </tbody>
               </table>
               <div class="text-center">
-                <button @click="doAction($event)" class="rounded-full bg-indigo-600 hover:bg-indigo-800 px-6 py-3 text-white"
+                <button @click="doUpsert($event)" class="rounded-full bg-indigo-600 hover:bg-indigo-800 px-6 py-3 text-white"
                   type="submit">{{buttonName}}</button>
               </div>
             </div>
@@ -1167,40 +1167,63 @@
             }
           },  
           methods: {
+            doUpsert : function(event){
+              var payloadBody = [];
+              this.records.forEach(record=>{
+                var obj = {};
+                obj.CustomerKey = this.selected_config_obj.key;
+                obj.Properties = [];
+                for(key in record){
+                  Properties.push({Name:key,Value : record[key]});
+                }
+                payloadBody.push(obj);
+              })
+              var payload = {
+                target : this.selected_config_obj.key,
+                body : payloadBody
+              }
+              //do api call
+              console.log('payload',payload);
+              this.doCallOut('POST',payload,'UPSERT');
+            },
             doAction(event){
               console.log(event.target.name);
-              if(this.selectedAction == 'Add'){
-                var payload = {
-                  target : this.selected_config_obj.key,
-                  body : this.records
-                }
-                //do api call
-                console.log('payload',payload);
-              }else if(this.selectedAction == 'Update'){
+              if(this.selectedAction == 'Update'){
                 this.searchObj.target = this.selected_config_obj.key;
                 const queryParams = new URLSearchParams(this.searchObj).toString();
                 console.log('queryParams',queryParams);
-                const headers = { "Content-Type": "application/json" };
-                fetch(this.api_url+'?'+queryParams, {
-                  method: 'GET',
-                  headers: headers
-                }).then((response)=>response.json()).then((data)=>{
-                  this.records = data.records;
-                  this.showFieldsSection = false;
-                  this.showrecordstable = true;
-                  this.buttonName = 'Add/Update';
-                }).catch(err=>{
-                  
-                }).finally(()=>{
-                  
-                })
+                this.doCallOut('GET',null,'SEARCH')
 
               }else if(this.selectedAction == 'Delete'){
                 var payload = {
                   target : this.selected_config_obj.key,
                   body : this.searchObj
-                } 
+                };
+
               }
+            },
+            doCallOut : function(method,payload,source){
+              const headers = { "Content-Type": "application/json" };
+                fetch(this.api_url+'?'+queryParams, {
+                  method: 'GET',
+                  headers: headers,
+                  body : payload
+                }).then((response)=>response.json()).then((data)=>{
+                  if(source === 'SEARCH'){
+                    this.records = data.records;
+                    this.showFieldsSection = false;
+                    this.showrecordstable = true;
+                    this.buttonName = 'Upsert';
+                  }else if(source === 'UPSERT'){
+                    this.showFieldsSection = false;
+                    this.showrecordstable = false;
+                  }
+                  
+                }).catch(err=>{
+                  
+                }).finally(()=>{
+                  
+                })
             },
             addRows : function(event){
               console.log('asdf');
