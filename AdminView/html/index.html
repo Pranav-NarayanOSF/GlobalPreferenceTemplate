@@ -1173,7 +1173,8 @@
                 var obj = {};
                 obj.CustomerKey = this.selected_config_obj.key;
                 obj.Properties = [];
-                for(var key in record){
+                for(var key in record)
+                {
                   Properties.push({Name:key,Value : record[key]});
                 }
                 payloadBody.push(obj);
