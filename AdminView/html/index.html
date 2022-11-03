@@ -1196,7 +1196,9 @@
               console.log('sdf',this.selectedAction);
               if(this.selectedAction === 'ADD' || this.selectedAction === 'Add'){
                 this.showrecordstable = true;
+                this.showFieldsSection = false;
               }else{
+                this.showrecordstable = false;
                 this.showFieldsSection = true;
               }
             },
