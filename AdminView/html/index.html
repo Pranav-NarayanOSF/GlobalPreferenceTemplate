@@ -1205,12 +1205,12 @@
             },
             doCallOut : function(method,payload,source,queryParams){
               const headers = { "Content-Type": "application/json" };
-              
                 fetch(source === 'SEARCH' ? this.api_url+'?'+queryParams : this.api_url , {
                   method: method,
                   headers: headers,
-                  body : payload
+                  body : JSON.stringify(payload)
                 }).then((response)=>response.json()).then((data)=>{
+                  console.log('d',data);
                   if(source === 'SEARCH'){
                     this.records = data.records;
                     this.showFieldsSection = false;
@@ -1222,7 +1222,7 @@
                   }
                   
                 }).catch(err=>{
-                  
+                  console.log(err);
                 }).finally(()=>{
                   
                 })
