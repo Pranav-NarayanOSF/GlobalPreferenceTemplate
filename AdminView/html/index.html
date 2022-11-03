@@ -949,6 +949,13 @@
               <option value="" selected>Select an option</option>
               <option v-for="[key, value] in obj_config" v-bind:value="key">{{key}}</option>
             </select>
+            <div class="text-center">
+              <button @click="doshowRecordtable" v-disabled="confirmButtonDisable" class="rounded-full bg-indigo-600 hover:bg-indigo-800 px-6 py-3 text-white"
+                type="submit">Confirm</button>
+            </div>
+            <div v-if>
+
+            </div>
           </div>
           
         </div>
@@ -1055,6 +1062,7 @@
               showError : false,
               selectedAction : '',
               selectedDE : '',
+              selected_config_obj:{},
               show_de_picklist:false,
               label_name : '',
               actions : ['Add','Update','Delete'],
@@ -1073,6 +1081,17 @@
             }
           },  
           methods: {
+            doshowRecordtable : function(event){
+              this.records = [];
+              this.selected_config_obj = this.obj_config.get(this.selectedDE);
+              var record = {};
+              this.selected_config_obj.fields.forEach(field=>{
+                
+                record = {...record,[a]:""};
+              })
+              this.records.push(record);
+
+            },
             change_in_action: function(event){
               if(event.target.value === ''){
                 this.show_de_picklist = false;
