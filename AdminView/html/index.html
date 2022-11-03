@@ -1193,7 +1193,8 @@
                 });
                 this.records.push(record);
               }
-              if(this.selectedAction == 'ADD'){
+              console.log('sdf',this.selectedAction);
+              if(this.selectedAction === 'ADD' || this.selectedAction === 'Add'){
                 this.showrecordstable = true;
               }else{
                 this.showFieldsSection = true;
