@@ -950,7 +950,7 @@
               <option v-for="[key, value] in obj_config" v-bind:value="key">{{key}}</option>
             </select>
             <div class="text-center">
-              <button @click="doshowRecordtable" :disabled="confirmButtonDisable" class="rounded-full bg-indigo-600 hover:bg-indigo-800 px-6 py-3 text-white"
+              <button @click="doshowRecordtable" class="rounded-full bg-indigo-600 hover:bg-indigo-800 px-6 py-3 text-white"
                 type="submit">Confirm</button>
             </div>
             <div v-if="showrecordstable">
