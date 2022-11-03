@@ -1144,6 +1144,7 @@
               records : [],
               buttonName : '',
               selectedDE : '',
+              api_url:'https://mcpdwdml-zryw5dczwlf-f-f9kcm.pub.sfmc-content.com/ig11ktgzwam',
               selected_config_obj:{},
               showrecordstable : false,
               showFieldsSection : false,
@@ -1178,6 +1179,19 @@
                 this.searchObj.target = this.selected_config_obj.key;
                 const queryParams = new URLSearchParams(this.searchObj).toString();
                 console.log('queryParams',queryParams);
+                const headers = { "Content-Type": "application/json" };
+                fetch(this.api_url+'?'+queryParams, {
+                  method: 'GET',
+                  headers: headers
+                }).then((response)=>response.json()).then((data)=>{
+                  console.log('da',data);
+                  
+                }).catch(err=>{
+                  
+                }).finally(()=>{
+                  
+                })
+
               }else if(this.selectedAction == 'Delete'){
                 var payload = {
                   target : this.selected_config_obj.key,
