@@ -989,7 +989,7 @@
                       name="key" id="key" v-model="record[key]">
                     </td>
                     <td>
-                      <button @click="addRows()" class="rounded-full bg-indigo-600 hover:bg-indigo-800 px-6 py-3 text-white"><i class="fa fa-trash"></i>Remove</button>
+                      <button class="btn"><i class="fa fa-trash"></i></button>
                     </td>
                   </tr>
                 </tbody>
@@ -1122,11 +1122,15 @@
           },  
           methods: {
             addRows : function(event){
+              console.log('asdf',addRows)
               var record = {};
               this.selected_config_obj.fields.forEach(field=>{
                 record = {...record,[field.name]:""};
               });
               this.records.push(record);
+            },
+            removeRows : function(index){
+              this.rows.splice(index,1);
             },
             doshowRecordtable : function(event){
               if(this.selectedDE == ''){
