@@ -1175,6 +1175,7 @@
                 //do api call
                 console.log('payload',payload);
               }else if(this.selectedAction == 'Update'){
+                this.searchObj.target = this.selected_config_obj.key;
                 const queryParams = new URLSearchParams(this.searchObj).toString();
                 console.log('queryParams',queryParams);
               }else if(this.selectedAction == 'Delete'){
