@@ -952,7 +952,7 @@
             <br/>
             <div class="text-center">
               <button @click="doshowRecordtable" class="rounded-full bg-indigo-600 hover:bg-indigo-800 px-6 py-3 text-white"
-                type="submit">Confirm</button>
+                type="submit" >Confirm</button>
             </div>
             <div v-if="showrecordstable">
               <div v-if="showError">
@@ -967,7 +967,6 @@
                   <span class="sr-only">Please select a DE</span>
                 </div>
               </div>
-              {{records}}
               <table class="table-auto">
                 <thead>
                   <tr>
@@ -1113,6 +1112,7 @@
             doshowRecordtable : function(event){
               if(this.selectedDE == ''){
                 this.showError = true;
+                this.showrecordstable = true;
               }else{
                 this.confirmButtonDisable = false;
                 this.showError = false;
