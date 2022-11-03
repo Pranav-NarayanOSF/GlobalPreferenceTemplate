@@ -1115,6 +1115,7 @@
                 this.showError = true;
               }else{
                 this.confirmButtonDisable = false;
+                this.showError = false;
                 this.records = [];
                 this.selected_config_obj = this.obj_config.get(this.selectedDE);
                 console.log('****',this.obj_config.get(this.selectedDE));
@@ -1122,7 +1123,8 @@
                 this.selected_config_obj.fields.forEach(field=>{
                   
                   record = {...record,[field]:""};
-                })
+                });
+                console.log('record',record);
                 this.records.push(record);
                 this.showrecordstable = true;
               }
