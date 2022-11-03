@@ -943,7 +943,7 @@
           </select>
           <br/>
           <div v-if="show_de_picklist">
-            <label for="de" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">{{labelName}}</label>
+            <label for="de" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">{{label_name}}</label>
             <select v-model="selectedDE" id="de" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 <option v-for="[key, value] in obj_config" v-bind:value="key">{{key}}</option>
             </select>
@@ -1054,7 +1054,7 @@
               selectedAction : 'Add',
               selectedDE : '',
               show_de_picklist:false,
-              labelName : '',
+              label_name : '',
               actions : ['Add','Update','Delete'],
               obj_config : new Map(),
               url : "https://mcpdwdml-zryw5dczwlf-f-f9kcm.pub.sfmc-content.com/a32jwmqkvaa",
@@ -1073,11 +1073,11 @@
           methods: {
             change_in_action: function(event){
               if(event.target.value === 'ADD'){
-                labelName = 'record/s to the data extension';
+                this.label_name = 'record/s to the data extension';
               }else if(event.target.value === 'UPDATE' ){
-                labelName = 'record/s in the data extension';
+                this.label_name = 'record/s in the data extension';
               }else{
-                labelName = 'record/s from the data extension';
+                this.label_name = 'record/s from the data extension';
               }
               this.show_de_picklist = true;
             },
