@@ -1175,7 +1175,7 @@
                 obj.Properties = [];
                 for(var key in record)
                 {
-                  Properties.push({Name:key,Value : record[key]});
+                  obj.Properties.push({Name:key,Value : record[key]});
                 }
                 payloadBody.push(obj);
               })
