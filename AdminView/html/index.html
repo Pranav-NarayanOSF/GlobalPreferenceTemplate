@@ -942,8 +942,9 @@
               <option v-for="action in actions" v-bind:value="action">{{action}}</option>
           </select>
           <label for="de" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">record/s from the Data Extension</label>
+          {{obj_config}}
           <select id="de" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-              <option v-for="[key, value] in objects" v-bind:value="key">{{key}}</option>
+              <option v-for="[key, value] in obj_config" v-bind:value="key">{{key}}</option>
           </select>
 
         </div>
@@ -1049,22 +1050,7 @@
               showSpinner : false,
               showError : false,
               actions : ['Add','Update','Delete'],
-              objects : ()=>{
-                obj = new Map();
-                obj.set('Preferences',{
-                  fields : [],
-                  key : ""
-                });
-                obj.set('Labels',{
-                  fields : [],
-                  key : ""
-                });
-                obj.set('Translations',{
-                  fields : [],
-                  key : ""
-                });
-                return obj;
-              },
+              obj_config : new Map(),
               url : "https://mcpdwdml-zryw5dczwlf-f-f9kcm.pub.sfmc-content.com/a32jwmqkvaa",
               adminKey : 'F3D7F9DA-6E42-4880-B7E6-1DFAF6C4C07A',
               user:{
@@ -1123,7 +1109,21 @@
               })
             }
           },
-        
+          created(){
+            this.obj_config.set('Preferences',{
+              fields : [],
+              key : ""
+            });
+            this.obj_config.set('Labels',{
+              fields : [],
+              key : ""
+            });
+            this.obj_config.set('Translations',{
+              fields : [],
+              key : ""
+            });
+
+          },
           // Lifecycle hooks are called at different stages
           // of a component's lifecycle.
           // This function will be called when the component is mounted.
