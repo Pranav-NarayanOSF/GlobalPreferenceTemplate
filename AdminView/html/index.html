@@ -989,8 +989,8 @@
                       name="key" id="key" v-model="record[key]">
                     </td>
                     <td>
-                      <div class="text-right">
-                        <button class="btn"><i class="fa fa-trash"></i></button>
+                      <div class="text-center">
+                        <button  @click="removeRows($index)" class="btn"><i class="fa fa-trash"></i></button>
                       </div>
                     </td>
                   </tr>
