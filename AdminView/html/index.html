@@ -968,10 +968,10 @@
                 </div>
               </div>
               {{records}}
-              <!-- <table class="table-auto">
+              <table class="table-auto">
                 <thead>
                   <tr>
-                    <th v-for="fields in selected_config_obj">{{field.name}}</th>
+                    <th v-for="field in selected_config_obj.fields">{{field.label}}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -982,7 +982,7 @@
                     </td>
                   </tr>
                 </tbody>
-              </table> -->
+              </table>
             </div>
           </div>
         </div>
@@ -1191,26 +1191,31 @@
             this.obj_config.set('Preferences',{
               fields : [{
                 "name":"Preference_Type",
+                "label":"Preference_Type",
                 "type":"text",
                 "tooltip":""
               },
               {
                 "name":"Default_Values",
+                "label":"Default_Values",
                 "type":"text",
                 "tooltip":""
               },
               {
                 "name":"BU_ID",
+                "label":"BU_ID",
                 "type":"text",
                 "tooltip":""
               },
               {
                 "name":"Preference_ID",
+                "label":"Preference_ID",
                 "type":"text",
                 "tooltip":""
               },
               {
                 "name":"Category_ID",
+                "label":"Category_ID",
                 "type":"text",
                 "tooltip":""
               }
@@ -1220,21 +1225,25 @@
             this.obj_config.set('Labels',{
               fields : [{
                 "name":"BU_ID",
+                "label":"BU_ID",
                 "type":"text",
                 "tooltip":""
               },
               {
                 "name":"Preference_ID",
+                "label":"Preference_ID",
                 "type":"text",
                 "tooltip":""
               },
               {
                 "name":"Language_Code",
+                "label":"Language_Code",
                 "type":"text",
                 "tooltip":""
               },
               {
                 "name":"Label_Values",
+                "label":"Label_Values",
                 "type":"text",
                 "tooltip":""
               }],
@@ -1243,21 +1252,25 @@
             this.obj_config.set('Values',{
               fields : [{
                 "name":"BU_ID",
+                "label":"BU_ID",
                 "type":"text",
                 "tooltip":""
               },
               {
                 "name":"Preference_ID",
+                "label":"Preference_ID",
                 "type":"text",
                 "tooltip":""
               },
               {
                 "name":"Language_Code",
+                "label":"Language_Code",
                 "type":"text",
                 "tooltip":""
               },
               {
                 "name":"Option_Value",
+                "label":"Option_Value",
                 "type":"text",
                 "tooltip":""
               }],
@@ -1267,20 +1280,24 @@
               fields : [{
                 "name":"BU_ID",
                 "type":"text",
+                "label":"BU_ID",
                 "tooltip":""
               },
               {
                 "name":"Category_ID",
+                "label":"Category_ID",
                 "type":"text",
                 "tooltip":""
               },
               {
                 "name":"Category_Label",
+                "label":"Category_Label",
                 "type":"text",
                 "tooltip":""
               },
               {
                 "name":"Category_Index",
+                "label":"Category_Index",
                 "type":"text",
                 "tooltip":""
               }],
