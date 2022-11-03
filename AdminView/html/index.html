@@ -1184,8 +1184,9 @@
                   method: 'GET',
                   headers: headers
                 }).then((response)=>response.json()).then((data)=>{
-                  console.log('da',data);
-                  
+                  this.records = data.records;
+                  this.showFieldsSection = false;
+                  this.showrecordstable = true;
                 }).catch(err=>{
                   
                 }).finally(()=>{
