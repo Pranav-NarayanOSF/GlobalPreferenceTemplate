@@ -1105,7 +1105,7 @@
               var record = {};
               this.selected_config_obj.fields.forEach(field=>{
                 
-                record = {...record,[a]:""};
+                record = {...record,[field]:""};
               })
               this.records.push(record);
               this.showrecordstable = true;
