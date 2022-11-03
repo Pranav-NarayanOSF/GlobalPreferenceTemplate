@@ -989,7 +989,9 @@
                       name="key" id="key" v-model="record[key]">
                     </td>
                     <td>
-                      <button class="btn"><i class="fa fa-trash"></i></button>
+                      <div class="text-right">
+                        <button class="btn"><i class="fa fa-trash"></i></button>
+                      </div>
                     </td>
                   </tr>
                 </tbody>
@@ -1122,7 +1124,7 @@
           },  
           methods: {
             addRows : function(event){
-              console.log('asdf',addRows)
+              console.log('asdf')
               var record = {};
               this.selected_config_obj.fields.forEach(field=>{
                 record = {...record,[field.name]:""};
