@@ -939,13 +939,15 @@
           </div>
           <label for="action" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">I want to </label>
           <select v-model="selectedAction" @change="change_in_action($event)" id="action" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-              <option v-for="action in actions" v-bind:value="action">{{action}}</option>
+            <option v-for="action in actions" value="" selected>Select an option</option>
+            <option v-for="action in actions" v-bind:value="action">{{action}}</option>
           </select>
           <br/>
           <div v-if="show_de_picklist">
             <label for="de" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">{{label_name}}</label>
             <select v-model="selectedDE" id="de" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <option v-for="[key, value] in obj_config" v-bind:value="key">{{key}}</option>
+              <option v-for="action in actions" value="" selected>Select an option</option>
+              <option v-for="[key, value] in obj_config" v-bind:value="key">{{key}}</option>
             </select>
           </div>
           
@@ -1051,7 +1053,7 @@
               headers : { "Content-Type": "application/json" },
               showSpinner : false,
               showError : false,
-              selectedAction : 'Add',
+              selectedAction : '',
               selectedDE : '',
               show_de_picklist:false,
               label_name : '',
@@ -1072,13 +1074,18 @@
           },  
           methods: {
             change_in_action: function(event){
-              if(event.target.value === 'ADD'){
-                this.label_name = 'record/s to the data extension';
-              }else if(event.target.value === 'UPDATE' ){
-                this.label_name = 'record/s in the data extension';
+              if(event.target.value === ''){
+                this.show_de_picklist = false;
               }else{
-                this.label_name = 'record/s from the data extension';
+                if(event.target.value === 'ADD'){
+                  this.label_name = 'record/s to the data extension';
+                }else if(event.target.value === 'UPDATE' ){
+                  this.label_name = 'record/s in the data extension';
+                }else{
+                  this.label_name = 'record/s from the data extension';
+                }
               }
+              
               this.show_de_picklist = true;
             },
             doLogin : function(event){
