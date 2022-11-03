@@ -955,7 +955,7 @@
                 type="submit"  :disabled='confirmButtonDisable'>Confirm</button>
             </div>
             <br/><br/>
-            <div v-if="showrecordstable" style="margin-top:5%;">
+            <div v-if="showrecordstable" style="margin-top:2%;">
               <div v-if="showError">
                 <div class="flex p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
                   role="alert">
@@ -972,7 +972,7 @@
                 </div>
               </div>
               <div class="text-right">
-                <button class="rounded-full bg-indigo-600 hover:bg-indigo-800 px-6 py-3 text-white"><i class="fa fa-plus"></i> Add</button>
+                <button @click="addRows()" class="rounded-full bg-indigo-600 hover:bg-indigo-800 px-6 py-3 text-white"><i class="fa fa-plus"></i> Add</button>
 
               </div>
               <table class="table-auto" style="margin-top:5%;">
@@ -1117,6 +1117,13 @@
             }
           },  
           methods: {
+            addRows : function(event){
+              var record = {};
+              this.selected_config_obj.fields.forEach(field=>{
+                record = {...record,[field.name]:""};
+              });
+              this.records.push(record);
+            },
             doshowRecordtable : function(event){
               if(this.selectedDE == ''){
                 this.showError = true;
