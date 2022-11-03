@@ -1121,8 +1121,7 @@
                 console.log('****',this.obj_config.get(this.selectedDE));
                 var record = {};
                 this.selected_config_obj.fields.forEach(field=>{
-                  
-                  record[field] = '';
+                  record = {...record,[field.name]:""};
                 });
                 console.log('record',record);
                 this.records.push(record);
