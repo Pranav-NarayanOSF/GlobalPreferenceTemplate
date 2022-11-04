@@ -1233,20 +1233,39 @@
                 }).then((response)=>response.json()).then((data)=>{
                   console.log('d',data);
                   if(source === 'SEARCH'){
-                    this.records = data.records;
-                    this.showFieldsSection = false;
-                    this.showrecordstable = true;
-                    this.buttonName = 'Upsert';
-                    this.showSuccessMessage = true;
-                    this.successMessage = 'Records found successfully';
+                    if(data.statusCode === 200){
+                      this.records = data.records;
+                      this.showFieldsSection = false;
+                      this.showrecordstable = true;
+                      this.buttonName = 'Upsert';
+                      this.showSuccessMessage = true;
+                      this.successMessage = 'Records found successfully';
+                    }else{
+                      this.showError = true;
+                      this.errorMessage = d.errors.join("<br/>")
+                    }
+                    
                   }else if(source === 'UPSERT'){
+                    if(data.statusCode === 200){
+                      this.showSuccessMessage = true;
+                      this.successMessage = 'Records deleted successfully';
+                    }else{
+                      this.showError = true;
+                      this.errorMessage = d.errors.join("<br/>")
+                    }
                     this.showFieldsSection = false;
                     this.showrecordstable = false;
                     this.showSuccessMessage = true;
                     this.successMessage = 'Records upserted successfully';
                   }else if(source === 'DELETE'){
-                    this.showSuccessMessage = true;
+                    if(data.statusCode === 200){
+                      this.showSuccessMessage = true;
                     this.successMessage = 'Records deleted successfully';
+                    }else{
+                      this.showError = true;
+                      this.errorMessage = d.errors.join("<br/>")
+                    }
+                    
                   }
                   
                 }).catch(err=>{
