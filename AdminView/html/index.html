@@ -1240,6 +1240,8 @@
                       this.buttonName = 'Upsert';
                       this.showSuccessMessage = true;
                       this.successMessage = 'Records found successfully';
+                      this.showrecordstable = true;
+                      this.showFieldsSection = false;
                     }else{
                       this.showError = true;
                       this.errorMessage = data.errors.join("<br/>")
@@ -1274,15 +1276,17 @@
                   this.showError = true;
                   this.errorMessage = JSON.stringify(err);
                 }).finally(()=>{
-                  setTimeout(()=>{
-                    this.showFieldsSection = false;
-                    this.showrecordstable = false;
-                    this.showSuccessMessage = false;
-                    this.successMessage = '';
-                    this.showError = false;
-                    this.errorMessage = '';
-                    this.confirmButtonDisable = false;
-                  },5000)
+                 if(source === 'UPSERT' || source === 'DELETE'){
+                    setTimeout(()=>{
+                      this.showFieldsSection = false;
+                      this.showrecordstable = false;
+                      this.showSuccessMessage = false;
+                      this.successMessage = '';
+                      this.showError = false;
+                      this.errorMessage = '';
+                      this.confirmButtonDisable = false;
+                    },5000)
+                  }
                 })
             },
             addRows : function(event){
