@@ -1264,7 +1264,8 @@
                     this.successMessage = 'Records deleted successfully';
                     }else{
                       this.showError = true;
-                      this.errorMessage = data.errors.join("<br/>")
+                      console.log(data.errors.join("\r\n"));
+                      this.errorMessage = data.errors.join("\r\n");
                     }
                     
                   }
@@ -1365,7 +1366,7 @@
                   this.showSpinner = false;
                   this.loginCompleted = true;
                   this.showSuccessMessage = true;
-                  this.showSuccessMessage = false;
+                  
                   const dropdownEl = document.querySelector('[data-dropdown-toggle]');
                   if (dropdownEl) {
                       dropdownEl.click();
@@ -1376,6 +1377,8 @@
                 }
               }).catch((err)=>{
                 console.log('err',err)
+              }).finally(()=>{
+                this.showSuccessMessage = false;
               })
             }
           },
