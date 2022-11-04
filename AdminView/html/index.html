@@ -1354,6 +1354,9 @@
             doLogOut : function(event){
               this.showSpinner = true;
               this.loginCompleted = false;
+              setTimeout(()=>{
+                this.showSpinner = false;
+              },3000)
             },
             doLogin : function(event){
               this.showSpinner = true;
