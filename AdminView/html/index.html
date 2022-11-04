@@ -914,6 +914,9 @@
   <main>
     <div id="app" class="bg-white mx-auto mt-5 mb-10 p-10 md:p-12 w-full md:w-5/6 max-w-screen-md" data-v-app="">
       <div v-if="loginCompleted">
+        <div class="text-right">
+          <button @click="doLogOut()" class="rounded-full bg-indigo-600 hover:bg-indigo-800 px-6 py-3 text-white">Log out</button>
+        </div>
         <div v-if="showSpinner" class="flex justify-center items-center space-x-2">
           <div class="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full text-blue-600"
             role="status">
@@ -1347,6 +1350,10 @@
                 this.buttonName = 'Search';
                 this.show_de_picklist = true;
               }
+            },
+            doLogOut : function(event){
+              this.showSpinner = true;
+              this.loginCompleted = false;
             },
             doLogin : function(event){
               this.showSpinner = true;
