@@ -965,9 +965,25 @@
                       d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
                       clip-rule="evenodd"></path>
                   </svg>
-                  <span class="sr-only">Please select a DE</span>
+                  <span class="sr-only">{{errorMessage}}</span>
                   <div>
-                    <span class="font-medium">Please select a DE</span><br />
+                    <span class="font-medium">{{errorMessage}}</span><br />
+                  </div>
+                </div>
+              </div>
+              <div v-if="showSuccessMessage">
+                <div id="success"
+                  class="flex p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800"
+                  role="alert">
+                  <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                      d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                      clip-rule="evenodd"></path>
+                  </svg>
+                  <span class="sr-only">{{successMessage}}</span>
+                  <div>
+                    <span class="font-medium">{{successMessage}}</span>
                   </div>
                 </div>
               </div>
@@ -1198,9 +1214,14 @@
               }else if(this.selectedAction == 'Delete'){
                 var payload = {
                   target : this.selected_config_obj.key,
+                  masterPreferences : {
+                    key : 'Master_Preferences',
+                    uniqueField : 'Preference_ID'
+                  },
                   body : this.searchObj
                 };
-
+                console.log(payload);
+                this.doCallOut('DELETE',payload,'DELETE',null)
               }
             },
             doCallOut : function(method,payload,source,queryParams){
@@ -1216,13 +1237,22 @@
                     this.showFieldsSection = false;
                     this.showrecordstable = true;
                     this.buttonName = 'Upsert';
+                    this.showSuccessMessage = true;
+                    this.successMessage = 'Records found successfully';
                   }else if(source === 'UPSERT'){
                     this.showFieldsSection = false;
                     this.showrecordstable = false;
+                    this.showSuccessMessage = true;
+                    this.successMessage = 'Records upserted successfully';
+                  }else if(source === 'DELETE'){
+                    this.showSuccessMessage = true;
+                    this.successMessage = 'Records deleted successfully';
                   }
                   
                 }).catch(err=>{
                   console.log(err);
+                  this.showError = true;
+                  this.errorMessage = JSON.stringify(err);
                 }).finally(()=>{
                   
                 })
@@ -1243,6 +1273,7 @@
             doshowRecordtable : function(event){
               if(this.selectedDE == ''){
                 this.showError = true;
+                this.errorMessage = 'Please select DE';
                 this.showrecordstable = true;
               }else{
                 this.confirmButtonDisable = true;
