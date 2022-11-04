@@ -1242,7 +1242,7 @@
                       this.successMessage = 'Records found successfully';
                     }else{
                       this.showError = true;
-                      this.errorMessage = d.errors.join("<br/>")
+                      this.errorMessage = data.errors.join("<br/>")
                     }
                     
                   }else if(source === 'UPSERT'){
@@ -1251,7 +1251,7 @@
                       this.successMessage = 'Records deleted successfully';
                     }else{
                       this.showError = true;
-                      this.errorMessage = d.errors.join("<br/>")
+                      this.errorMessage = data.errors.join("<br/>")
                     }
                     this.showFieldsSection = false;
                     this.showrecordstable = false;
@@ -1263,7 +1263,7 @@
                     this.successMessage = 'Records deleted successfully';
                     }else{
                       this.showError = true;
-                      this.errorMessage = d.errors.join("<br/>")
+                      this.errorMessage = data.errors.join("<br/>")
                     }
                     
                   }
