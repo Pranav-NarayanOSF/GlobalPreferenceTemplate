@@ -938,14 +938,14 @@
             </div>
           </div>
           <label for="action" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">I want to </label>
-          <select v-model="selectedAction" @change="change_in_action($event)" id="action" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <select v-model="selectedAction" @change="change_in_action($event)" id="action" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">
             <option value="" selected>Select an option</option>
             <option v-for="action in actions" v-bind:value="action">{{action}}</option>
           </select>
           <br/>
           <div v-if="show_de_picklist">
             <label for="de" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">{{label_name}}</label>
-            <select v-model="selectedDE" id="de" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <select v-model="selectedDE" id="de" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">
               <option value="" selected>Select an option</option>
               <option v-for="[key, value] in obj_config" v-bind:value="key">{{key}}</option>
             </select>
@@ -1035,7 +1035,7 @@
               <div>
                 <div class="my-2">
                   <label for="field" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Column Name</label>
-                  <select v-model="searchObj.field" id="field" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                  <select v-model="searchObj.field" id="field" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option value="" selected>Select an option</option>
                     <option v-for="field in selected_config_obj.fields" v-bind:value="field.name">{{field.name}}</option>
                   </select>
